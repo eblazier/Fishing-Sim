@@ -1,3 +1,9 @@
+let stats;
+window.onload = () => {
+    // add some save file shit idk man
+    stats = {balance: 0, rod: 0, unlocked: 0, inventory: []};
+}
+
 /** Class for getting random values */
 class Rand {
     /** 
@@ -15,12 +21,39 @@ class Rand {
     }
 }
 
-// touch list meow~ // ------
-let touchList = new TouchList({
-    sensual: [gojo, nanami, oliver_aiku],
-    hateful: [sukuna, mahito, hanami, jogo],
-    pitiful: [kaiser, yuji, todo, megumi]
-});
+
+// /** Class for storing the properties of one's profile */
+// class Profile {
+//     /**
+//      * @param {int} balance the player's balance
+//      * @param {int} rod the player's equipped rod
+//      * @param {int} unlocked the player's farthest unlocked area
+//      * @param {String[]} inventory an array of the player's fishes
+//      */
+//     constructor(balance, rod, unlocked, inventory) {
+//         this.balance = balance;
+//         this.rod = rod;
+//         this.unlocked = unlocked;
+//         this.inventory = inventory;
+//     }
+
+//     get getBalance() {return this.balance;}
+//     get getRod() {return this.rod;}
+//     get getUnlocked() {return this.unlocked;}
+//     get getInventory() {return this.inventory;}
+
+//     /** @param {int} x */
+//     set setBalance(x) {this.balance = x;}
+//     /** @param {int} x */
+//     set setRod(x) {this.rod = x;}
+//     /** @param {int} x */
+//     set setUnlocked(x) {this.unlocked = x;}
+//     /** @param {String[]} x */
+//     set setInventory(x) {this.inventory = x;}
+
+//     /** @param {String} x */
+//     addToInventory(x) {this.inventory.push(x);}
+// }
 
 
 /** Fish class for fishies :3333 */
@@ -34,56 +67,38 @@ class Fish {
         this.name = name;
         this.grade = grade;
         this.length = length;
+        this.value = length * (
+            grade == 0
+            ? (1 / (1.05 - areaChances[stats.unlocked > 1 ? 1 : stats.unlocked][0])) / 3
+            : (1 / (1.05 - areaChances[stats.unlocked][grade])) / 3
+        );
     }
 
     /** @return returns the name of the fish */
-    get getName() {
+    getName() {
         return this.name;
     }
 
     /** @return returns the length of the fish */
-    get getLength() {
+    getLength() {
         return this.length;
     }
 
     /** @return the selling value of the fish */
-    get getValue() {
-        switch(grade) {
-            case COMMON:
-                return length * (1 / areaChances[stats.unlocked > 1 ? 1 : stats.unlocked][0]);
-                break;
-            case RARE:
-                return length * (1 / areaChances[stats.unlocked][1]);
-                break;
-            case LEGENDARY:
-                return length * (1 / areaChances[stats.unlocked][2]);
-                break;
-            case EXOTIC:
-                return length * (1 / areaChances[stats.unlocked][3]);
-                break;
-            case ENDANGERED:
-                return length * (1 / areaChances[stats.unlocked][4]);
-                break;
-        }
+    getValue() {
+        return this.value;
     }
 }
 
 /* Fishing Methods */
 
-window.onload = () => {
-    // add some save file shit idk man
-    let stats = {balance: 0, rod: 0, unlocked: 0, inventory: []};
-}
-
-
 // Areas // ------
-const Areas = {LAKE, RIVER, BEACH, OCEAN};
-let currentArea = Areas.RIVER;
+let currentArea = 0;
 const areaFish = [
-    {common: [], rare: [], legendary: []},
-    {common: [], rare: [], legendary: []},
-    {rare: [], legendary: [], exotic: []},
-    {rare: [], legendary: [], exotic: [], endangered: []}
+    {common: ["c"], rare: ["r"], legendary: ["l"]},
+    {common: ["c"], rare: ["r"], legendary: ["l"]},
+    {rare: ["r"], legendary: ["l"], exotic: ["ex"]},
+    {rare: ["r"], legendary: ["l"], exotic: ["ex"], endangered: ["en"]}
 ];
 const areaChances = [
     [0.70, 0.70 + 0.25, 0.95 + 0.05], // c70, r25, l5
@@ -91,6 +106,14 @@ const areaChances = [
     [0, 0.65, 0.65 + 0.30, 0.95 + 0.05], // c0 r65, l30, e5
     [0, 0.50, 0.50 + 0.25, 0.75 + 0.20, 0.95 + 0.05] // c0 r50, l25, e15, ed5
 ];
+
+/** sets currentArea to a new area */
+function move(area) {
+    if(stats.unlocked >= area) {
+        currentArea = area;
+        console.log(`Moved to the ${area}th area.`);
+    } else console.log('Cannot move to that area.');
+}
 
 
 // Tools // ------
@@ -113,40 +136,15 @@ function cast() {
 
     console.log(
         `You are using a ${rods[stats.rod].name} rod,
-        and are in the ${currentArea} area.
+        and are in the ${currentArea + 1}th area.
         Luck level is: ${chance}`
     );
 
-    switch(currentArea) {
-        case LAKE:
-            for(let grade = 0; grade < 3; grade++)
-                if(chance <= areaChances[0][grade] - (rods[stats.rod].luck * luckBonus)) {
-                    catchFish(grade, 0);
-                    break;
-                }
+    for(let grade = 0; grade < 5; grade++)
+        if(chance <= areaChances[0][grade] - (rods[stats.rod].luck * luckBonus)) {
+            catchFish(grade, currentArea);
             break;
-        case RIVER:
-            for(let grade = 0; grade < 3; grade++)
-                if(chance <= areaChances[0][grade] - (rods[stats.rod].luck * luckBonus)) {
-                    catchFish(grade, 1);
-                    break;
-                }
-            break;
-        case BEACH:
-            for(let grade = 1; grade < 4; grade++)
-                if(chance <= areaChances[0][grade] - (rods[stats.rod].luck * luckBonus)) {
-                    catchFish(grade, 2);
-                    break;
-                }
-            break;
-        case OCEAN:
-            for(let grade = 1; grade < 5; grade++)
-                if(chance <= areaChances[0][grade] - (rods[stats.rod].luck * luckBonus)) {
-                    catchFish(grade, 3);
-                    break;
-                }
-            break;
-    }
+        }
 }
 
 const minLength = 8;
@@ -191,15 +189,20 @@ function catchFish(grade, area) {
             ));
             break;
     }
-    console.log(`Caught: ${stats.inventory[stats.inventory.length - 1].getName()}, Length: ${stats.inventory[stats.inventory.length - 1].getLength()}`)
+    console.log(
+        `Caught: ${stats.inventory[stats.inventory.length - 1].getName()},
+Length: ${stats.inventory[stats.inventory.length - 1].getLength()},
+Value: ${stats.inventory[stats.inventory.length - 1].getValue().toFixed(2)}`
+    );
 }
 
 /** sells all fishes in the player's inventory */
 function sellAll() {
     let changeInBal = 0;
-    for(let fish in stats.inventory) changeInBal += fish.getValue();
+    for(let i = 0; i < stats.inventory.length; i++) changeInBal += stats.inventory[i].getValue();
+    //for(let fish in stats.inventory) changeInBal += fish.getValue();
     stats.balance += changeInBal;
-    console.log(`You sold your inventory for \$${changeInBal}.`);
+    console.log(`You sold your inventory for \$${changeInBal.toFixed(2)}.`);
 
     stats.inventory = [];
 }
