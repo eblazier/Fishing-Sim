@@ -1,12 +1,23 @@
 /* Go away goofy ass mf */
 
 :root {
-    --a: ;
+    /* Sprite List */
+    --background: ;
 }
 
-html {}
+html {
+    width: 100%;
+}
 
-body {}
+body {
+    width: 100%;
+}
+
+main {
+    top: 25px;
+    width: 100%;
+    background-image: var(--background);
+}
 
 /* Header */
 
