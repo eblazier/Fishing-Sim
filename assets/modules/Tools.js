@@ -1,5 +1,5 @@
 /** Static class setting variables for in-game tools */
-export default class Tools {
+class Tools {
     /** amount of which the requirement for each grade drops depending on the luck that the player's rod has */
     static luckBonus = 0.005;
 

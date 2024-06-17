@@ -1,5 +1,5 @@
 /** Class for getting random values */
-export default class Rand {
+class Rand {
     /** 
      * @param {int} min minimum possible value that can be returned
      * @param {int} max maximum possible value that can be returned

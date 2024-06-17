@@ -1,0 +1,1 @@
+const save2 = new Profile(0, 0, 0, 0, 0);

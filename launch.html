@@ -4,18 +4,27 @@
     <title>Offline Fishing Sim</title>
     <meta name="viewport" content="width=device-width">
     <link href="./assets/main.css" rel="stylesheet">
-    <script src="./assets/classes/Areas.js"></script>
-    <script src="./assets/classes/Fish.js"></script>
-    <script src="./assets/classes/Profile.js"></script>
-    <script src="./assets/classes/Rand.js"></script>
-    <script src="./assets/classes/Tools.js"></script>
+
+    <!-- Imports -->
+    <script src="./assets/modules/Areas.js"></script>
+    <script src="./assets/modules/Fish.js"></script>
+    <script src="./assets/modules/Profile.js"></script>
+    <script src="./assets/modules/Rand.js"></script>
+    <script src="./assets/modules/Tools.js"></script>
+
+    <!-- Save Slots -->
+    <script src="./saves/save1.js"></script>
+    <script src="./saves/save2.js"></script>
+    <script src="./saves/save3.js"></script>
+
     <script src="./assets/main.js"></script>
 </head>
 
 <body>
 
     <header>
-        
+        <span id="balance"></span>
+        <span id="invValue"></span>
     </header>
 
     <main>
@@ -23,6 +32,8 @@
     </main>
 
     <footer>
+        save: <button onclick="save(1)">save</button>
+        <br>
         fishing:
         <button onclick="cast()">cast</button>
         <button onclick="sellAll()">sell</button>
