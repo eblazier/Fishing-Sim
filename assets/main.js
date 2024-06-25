@@ -1,4 +1,16 @@
+let profile;
+window.onload = () => {
+    profile = new Profile(0, 0, 0, 0, 0);
+    Profile.setBalance(profile.getBalance());
+    Profile.setInventoryValue(profile.getInventoryValue());
+}
+
+
 // Saving/Loading Data
+
+/** saves the current user data to a file named 'save${slot}.js'
+ * @param {int} slot the slot to save it in
+ */
 function save(slot) {
     let file = new Blob([
         `const save${slot} = new Profile(${profile.getBalance()}, ${profile.getInventoryValue()}, ${profile.getRod()}, ${profile.getUnlocked()}, ${profile.getCurrentArea()});`
@@ -15,21 +27,34 @@ function save(slot) {
     }, 0);
 }
 
-let profile;
-window.onload = () => {
-    // add some save file shit idk man
-    profile = save1;
+/** loads a save file, the specific one designated by slot
+ * @param {int} slot the save file to load
+ */
+function load(slot) {
+    switch(slot) {
+        case 1:
+            profile = save1;
+            break;
+        case 2:
+            profile = save2;
+            break;
+        case 3:
+            profile = save3;
+            break;
+        default:
+            profile = new Profile(0, 0, 0, 0, 0);
+            break;
+    }
     Profile.setBalance(profile.getBalance());
     Profile.setInventoryValue(profile.getInventoryValue());
 }
 
-// Testing
-const giveMoney = (x) => profile.deposit(x);
-
 
 // Fishing Methods
 
-/** sets unlocked to a new area */
+/** sets the farthest unlocked area to a new area 
+ * @param {int} area the area to set it to [0-3]
+*/
 function unlock(area) {
     if(profile.getBalance() >= Areas.areas[area].cost) {
         if(profile.getUnlocked() < area) {
@@ -40,7 +65,9 @@ function unlock(area) {
     } else console.log(`You cannot afford the ${Areas.areas[area].name} area.`)
 }
 
-/** sets currentArea to a new area */
+/** sets currentArea to a new area 
+ * @param {int} area the area to set it to [0-3]
+*/
 function move(area) {
     if(profile.getUnlocked() >= area) {
         profile.setCurrentArea(area);
@@ -125,8 +152,10 @@ function sellAll() {
  */
 function buyRod(rod) {
     if(Tools.rods[rod].cost <= profile.getBalance()) {
-        profile.withdraw(Tools.rods[rod].cost);
-        profile.setRod(rod);
-        console.log(`You bought the ${Tools.rods[rod].name} rod for \$${Tools.rods[rod].cost}.`);
+        if(rod > profile.getRod()) {
+            profile.withdraw(Tools.rods[rod].cost);
+            profile.setRod(rod);
+            console.log(`You bought the ${Tools.rods[rod].name} rod for \$${Tools.rods[rod].cost}.`);
+        } else console.log(`You already own a better rod.`)
     } else console.log(`You cannot afford the ${Tools.rods[rod].name} rod.`);
 }
