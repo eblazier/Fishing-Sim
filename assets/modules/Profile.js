@@ -8,11 +8,11 @@ class Profile {
      * @param {int} unlocked the player's farthest unlocked area
      */
     constructor(balance, inventoryValue, rod, currentArea, unlocked) {
-        this.balance = balance;
-        this.inventoryValue = inventoryValue;
-        this.rod = rod;
-        this.currentArea = currentArea;
-        this.unlocked = unlocked;
+        this.balance = balance || 0;
+        this.inventoryValue = inventoryValue || 0;
+        this.rod = rod || 0;
+        this.currentArea = currentArea || 0;
+        this.unlocked = unlocked || 0;
         this.inventory = [];
     }
 
@@ -42,18 +42,17 @@ class Profile {
         this.inventoryValue = 0;
         Profile.setInventoryValue(0);
     }
-
     getInventoryValue() {return this.inventoryValue;}
-
     /** @param {double} x */
     static setInventoryValue(x) {
-        document.getElementById('invValue').textContent = 'Inv. Value: $' + x.toFixed(2);
+        document.getElementById('invValue').textContent = 'Inventory Value: $' + x.toFixed(2);
     }
 
     // Balance Management
     /** @param {double} x  */
     withdraw(x) {
-        this.balance -= x;
+        if(x <= this.balance) this.balance -= x;
+        else this.balance = 0;
         Profile.setBalance(this.balance);
     }
     /** @param {double} x  */

@@ -1,7 +1,8 @@
 let profile;
 window.onload = () => {
-    profile = new Profile(0, 0, 0, 0, 0);
+    profile = new Profile();
     Profile.setBalance(profile.getBalance());
+    Areas.setArea(profile.getCurrentArea());
     Profile.setInventoryValue(profile.getInventoryValue());
 }
 
@@ -60,9 +61,9 @@ function unlock(area) {
         if(profile.getUnlocked() < area) {
             profile.setUnlocked(area);
             profile.withdraw(Areas.areas[area].cost);
-            console.log(`Unlocked the ${Areas.areas[area].name} area.`)
+            console.log(`Unlocked the ${Areas.areas[area].name} area.`);
         } else console.log(`You already have the ${Areas.areas[area].name} area.`);
-    } else console.log(`You cannot afford the ${Areas.areas[area].name} area.`)
+    } else console.log(`You cannot afford the ${Areas.areas[area].name} area.`);
 }
 
 /** sets currentArea to a new area 
@@ -71,6 +72,7 @@ function unlock(area) {
 function move(area) {
     if(profile.getUnlocked() >= area) {
         profile.setCurrentArea(area);
+        Areas.setArea(area);
         console.log(`Moved to the ${Areas.areas[area].name} area.`);
     } else console.log(`You have not unlocked the ${Areas.areas[area].name} area.`);
 }
@@ -156,6 +158,6 @@ function buyRod(rod) {
             profile.withdraw(Tools.rods[rod].cost);
             profile.setRod(rod);
             console.log(`You bought the ${Tools.rods[rod].name} rod for \$${Tools.rods[rod].cost}.`);
-        } else console.log(`You already own a better rod.`)
+        } else console.log(`You already own a better rod.`);
     } else console.log(`You cannot afford the ${Tools.rods[rod].name} rod.`);
 }
