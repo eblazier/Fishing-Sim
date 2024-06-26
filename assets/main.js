@@ -6,6 +6,10 @@ window.onload = () => {
     Profile.setInventoryValue(profile.getInventoryValue());
 }
 
+// Initializations
+
+let recentTimeouts = [];
+
 
 // Saving/Loading Data
 
@@ -26,6 +30,7 @@ function save(slot) {
         document.body.removeChild(s_Save);
         window.URL.revokeObjectURL(url);  
     }, 0);
+    GUI.alert('saving-alert', `Prompted you to save to slot ${slot}.`, 'green');
 }
 
 /** loads a save file, the specific one designated by slot
@@ -33,8 +38,10 @@ function save(slot) {
  */
 function load(slot) {
     const saves = [save1, save2, save3];
-    if(slot <= saves.length) profile = saves[slot - 1];
-    else profile = new Profile();
+    if(slot <= saves.length) {
+        profile = saves[slot - 1];
+        GUI.alert('saving-alert', `Loaded data from slot ${slot}.`, 'green');
+    } else profile = new Profile();
     Profile.setBalance(profile.getBalance());
     Profile.setInventoryValue(profile.getInventoryValue());
 }
@@ -50,9 +57,9 @@ function unlock(area) {
         if(profile.getUnlocked() < area) {
             profile.setUnlocked(area);
             profile.withdraw(Areas.areas[area].cost);
-            console.log(`Unlocked the ${Areas.areas[area].name} area.`);
-        } else console.log(`You already have the ${Areas.areas[area].name} area.`);
-    } else console.log(`You cannot afford the ${Areas.areas[area].name} area.`);
+            GUI.alert('shop-alert', `Unlocked the ${Areas.areas[area].name} area.`, 'green');
+        } else GUI.alert('shop-alert', `You already have the ${Areas.areas[area].name} area.`, 'red');
+    } else GUI.alert('shop-alert', `You cannot afford the ${Areas.areas[area].name} area.`, 'red');
 }
 
 /** sets currentArea to a new area 
@@ -62,8 +69,8 @@ function move(area) {
     if(profile.getUnlocked() >= area) {
         profile.setCurrentArea(area);
         Areas.setArea(area);
-        console.log(`Moved to the ${Areas.areas[area].name} area.`);
-    } else console.log(`You have not unlocked the ${Areas.areas[area].name} area.`);
+        GUI.alert('area-alert', `Moved to the ${Areas.areas[area].name} area.`, 'green');
+    } else GUI.alert('area-alert', `You have not unlocked the ${Areas.areas[area].name} area.`, 'red');
 }
 
 /**
@@ -146,7 +153,7 @@ function buyRod(rod) {
         if(rod > profile.getRod()) {
             profile.withdraw(Tools.rods[rod].cost);
             profile.setRod(rod);
-            console.log(`You bought the ${Tools.rods[rod].name} rod for \$${Tools.rods[rod].cost}.`);
-        } else console.log(`You already own a better rod.`);
-    } else console.log(`You cannot afford the ${Tools.rods[rod].name} rod.`);
+            GUI.alert('shop-alert', `You bought the ${Tools.rods[rod].name} rod for \$${Tools.rods[rod].cost}.`, 'green');
+        } else GUI.alert('shop-alert', `You already own a better rod.`, 'red');
+    } else GUI.alert('shop-alert', `You cannot afford the ${Tools.rods[rod].name} rod.`, 'red');
 }

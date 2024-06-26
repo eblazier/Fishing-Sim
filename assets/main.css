@@ -93,6 +93,11 @@ footer {
     margin: 3px 2px;
 }
 
+#area-alert, #saving-alert, #shop-alert {
+    font-size: 12px;
+    color: red;
+}
+
 
 /* Saving/Loading */
 
