@@ -34,18 +34,20 @@ class GUI {
     }
 
     /**
-     * alerts the user of a relevant issue that they encountered
+     * alerts the user of a relevant issue/action that they encountered/activated
      * @param {String} elem element to set as an alert box
      * @param {String} content what to show in the alert
      * @param {String} color color of the text in the alert box
      */
     static alert(elem, content, color) {
+        if(elem == 'area-alert') document.getElementsByClassName('shop-menu')[0].style.top = '126px';
         document.getElementById(elem).textContent = content;
         document.getElementById(elem).style.color = color;
         for(let timeout in recentTimeouts) clearTimeout(recentTimeouts[timeout]);
         recentTimeouts = [];
         recentTimeouts.push(setTimeout(() => {
             document.getElementById(elem).textContent = '';
+            if(elem == 'area-alert') document.getElementsByClassName('shop-menu')[0].style.top = '108px';
         }, 3500));
     }
 }

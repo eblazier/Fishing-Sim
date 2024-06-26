@@ -81,7 +81,7 @@ footer {
     color: #fff;
     font-weight: 600;
     box-shadow: 0 0 5px #000;
-    transition-duration: 0.2s;
+    transition-duration: 0.1s;
 }
 
 .menu-menu button, .save-menu button, .area-menu button, .shop-menu button {
@@ -91,6 +91,10 @@ footer {
     border-radius: 5px;
     box-shadow: 0 0 1px 0 #000;
     margin: 3px 2px;
+}
+
+.save-menu button[onclick="save(1, true)"] {
+    margin: 18px 2px 3px
 }
 
 #area-alert, #saving-alert, #shop-alert {

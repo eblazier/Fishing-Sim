@@ -34,8 +34,9 @@
     </div>
 
     <div class="save-menu" style="left: -500px;">
-        SAVE: <button onclick="save(1)">Slot #1</button><button onclick="save(2)">Slot #2</button><button onclick="save(3)">Slot #3</button><br>
-        LOAD: <button onclick="load(1)">Slot #1</button><button onclick="load(2)">Slot #2</button><button onclick="load(3)">Slot #3</button><br>
+        SAVE:&nbsp; <button onclick="save(1, false)">Slot #1</button><button onclick="save(2, false)">Slot #2</button><button onclick="save(3, false)">Slot #3</button><br>
+        LOAD:&nbsp; <button onclick="load(1)">Slot #1</button><button onclick="load(2)">Slot #2</button><button onclick="load(3)">Slot #3</button><br>
+        RESET: <button onclick="save(1, true)">Slot #1</button><button onclick="save(2, true)">Slot #2</button><button onclick="save(3, true)">Slot #3</button><br>
         <span id="saving-alert"></span>
     </div>
 
@@ -44,7 +45,7 @@
         <span id="area-alert"></span>
     </div>
 
-    <div class="shop-menu" style="right: -500px;">
+    <div class="shop-menu" style="right: -500px; top: 108px;">
         BUY AREA: <button onclick="unlock(1)">RIVER</button><button onclick="unlock(2)">BEACH</button><button onclick="unlock(3)">OCEAN</button><br>
         BUY ROD:&nbsp; <button onclick="buyRod(1)">NOVICE</button><button onclick="buyRod(2)">REINFORCED</button><button onclick="buyRod(3)">GOLDEN</button><button onclick="buyRod(4)">GOD</button><br>
         <span id="shop-alert"></span>

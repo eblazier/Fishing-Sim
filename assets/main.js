@@ -15,22 +15,41 @@ let recentTimeouts = [];
 
 /** saves the current user data to a file named 'save${slot}.js'
  * @param {int} slot the slot to save it in
+ * @param {boolean} reset if this command is being used to reset a save file or not
  */
-function save(slot) {
-    let file = new Blob([
-        `const save${slot} = new Profile(${profile.getBalance()}, ${profile.getInventoryValue()}, ${profile.getRod()}, ${profile.getUnlocked()}, ${profile.getCurrentArea()});`
-    ], {type: 'js'});
-    let s_Save = document.createElement('a');
-    let url = URL.createObjectURL(file);
-    s_Save.href = url;
-    s_Save.download = `save${slot}.js`;
-    document.body.appendChild(s_Save);
-    s_Save.click();
+function save(slot, reset) {
+    let save = document.createElement('a');
+    let url = URL.createObjectURL(new Blob([
+        `const save${slot} = new Profile(${reset ? `` : `${profile.getBalance()}, ${profile.getInventoryValue()}, ${profile.getRod()}, ${profile.getUnlocked()}, ${profile.getCurrentArea()}`});`
+    ], {type: 'js'}));
+    save.href = url;
+    save.download = `save${slot}.js`;
+    document.body.appendChild(save);
+    save.click();
     setTimeout(() => {
-        document.body.removeChild(s_Save);
+        document.body.removeChild(save);
         window.URL.revokeObjectURL(url);  
     }, 0);
-    GUI.alert('saving-alert', `Prompted you to save to slot ${slot}.`, 'green');
+    GUI.alert('saving-alert', reset ? `Prompted you to reset slot ${slot}.` : `Prompted you to save to slot ${slot}.`, 'lawngreen');
+}
+
+/** resets a save file
+ * @param {int} slot the slot to reser
+ */
+function reset(slot) {
+    let save = document.createElement('a');
+    let url = URL.createObjectURL(new Blob([
+        `const save${slot} = new Profile();`
+    ], {type: 'js'}));
+    save.href = url;
+    save.download = `save${slot}.js`;
+    document.body.appendChild(save);
+    save.click();
+    setTimeout(() => {
+        document.body.removeChild(save);
+        window.URL.revokeObjectURL(url);  
+    }, 0);
+    GUI.alert('saving-alert', `Prompted you to reset slot ${slot}.`, 'lawngreen');
 }
 
 /** loads a save file, the specific one designated by slot
@@ -40,7 +59,7 @@ function load(slot) {
     const saves = [save1, save2, save3];
     if(slot <= saves.length) {
         profile = saves[slot - 1];
-        GUI.alert('saving-alert', `Loaded data from slot ${slot}.`, 'green');
+        GUI.alert('saving-alert', `Loaded data from slot ${slot}.`, 'lawngreen');
     } else profile = new Profile();
     GUI.setBalance(profile.getBalance());
     GUI.setInventoryValue(profile.getInventoryValue());
@@ -57,7 +76,7 @@ function unlock(area) {
         if(profile.getUnlocked() < area) {
             profile.setUnlocked(area);
             profile.withdraw(Areas.areas[area].cost);
-            GUI.alert('shop-alert', `Unlocked the ${Areas.areas[area].name} area.`, 'green');
+            GUI.alert('shop-alert', `Unlocked the ${Areas.areas[area].name} area.`, 'lawngreen');
         } else GUI.alert('shop-alert', `You already have the ${Areas.areas[area].name} area.`, 'red');
     } else GUI.alert('shop-alert', `You cannot afford the ${Areas.areas[area].name} area.`, 'red');
 }
@@ -69,7 +88,7 @@ function move(area) {
     if(profile.getUnlocked() >= area) {
         profile.setCurrentArea(area);
         Areas.setArea(area);
-        GUI.alert('area-alert', `Moved to the ${Areas.areas[area].name} area.`, 'green');
+        GUI.alert('area-alert', `Moved to the ${Areas.areas[area].name} area.`, 'lawngreen');
     } else GUI.alert('area-alert', `You have not unlocked the ${Areas.areas[area].name} area.`, 'red');
 }
 
@@ -114,7 +133,7 @@ function catchFish(grade, area) {
     console.log(
 `Caught: ${profile.getInventory()[profile.inventory.length - 1].getName()},
 Length: ${profile.getInventory()[profile.inventory.length - 1].getLength()},
-Value: \$${profile.getInventory()[profile.inventory.length - 1].getValue().toFixed(2)}`
+Value: \$${GUI.localizeStyle(profile.getInventory()[profile.inventory.length - 1].getValue().toFixed(2))}`
     );
     GUI.setInventoryValue(profile.getInventoryValue());
 }
@@ -139,7 +158,7 @@ Luck level is: ${chance}`
 /** sells all fishes in the player's inventory */
 function sellAll() {
     profile.deposit(profile.getInventoryValue());
-    console.log(`You sold your inventory for \$${profile.getInventoryValue().toFixed(2)}.`);
+    console.log(`You sold your inventory for \$${GUI.localizeStyle(profile.getInventoryValue().toFixed(2))}.`);
 
     profile.clearInventory();
 }
@@ -153,7 +172,7 @@ function buyRod(rod) {
         if(rod > profile.getRod()) {
             profile.withdraw(Tools.rods[rod].cost);
             profile.setRod(rod);
-            GUI.alert('shop-alert', `You bought the ${Tools.rods[rod].name} rod for \$${Tools.rods[rod].cost}.`, 'green');
+            GUI.alert('shop-alert', `You bought the ${Tools.rods[rod].name} rod for \$${Tools.rods[rod].cost}.`, 'lawngreen');
         } else GUI.alert('shop-alert', `You already own a better rod.`, 'red');
     } else GUI.alert('shop-alert', `You cannot afford the ${Tools.rods[rod].name} rod.`, 'red');
 }
