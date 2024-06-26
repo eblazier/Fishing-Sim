@@ -1,9 +1,9 @@
 let profile;
 window.onload = () => {
     profile = new Profile();
-    Profile.setBalance(profile.getBalance());
+    GUI.setBalance(profile.getBalance());
     Areas.setArea(profile.getCurrentArea());
-    Profile.setInventoryValue(profile.getInventoryValue());
+    GUI.setInventoryValue(profile.getInventoryValue());
 }
 
 // Initializations
@@ -42,8 +42,8 @@ function load(slot) {
         profile = saves[slot - 1];
         GUI.alert('saving-alert', `Loaded data from slot ${slot}.`, 'green');
     } else profile = new Profile();
-    Profile.setBalance(profile.getBalance());
-    Profile.setInventoryValue(profile.getInventoryValue());
+    GUI.setBalance(profile.getBalance());
+    GUI.setInventoryValue(profile.getInventoryValue());
 }
 
 
@@ -116,7 +116,7 @@ function catchFish(grade, area) {
 Length: ${profile.getInventory()[profile.inventory.length - 1].getLength()},
 Value: \$${profile.getInventory()[profile.inventory.length - 1].getValue().toFixed(2)}`
     );
-    Profile.setInventoryValue(profile.getInventoryValue());
+    GUI.setInventoryValue(profile.getInventoryValue());
 }
 
 /** casts and catches a fish */
