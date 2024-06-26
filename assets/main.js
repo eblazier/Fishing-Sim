@@ -1,8 +1,8 @@
 let profile;
 window.onload = () => {
     profile = new Profile();
+    GUI.setArea(profile.getCurrentArea());
     GUI.setBalance(profile.getBalance());
-    Areas.setArea(profile.getCurrentArea());
     GUI.setInventoryValue(profile.getInventoryValue());
 }
 
@@ -61,6 +61,7 @@ function load(slot) {
         profile = saves[slot - 1];
         GUI.alert('saving-alert', `Loaded data from slot ${slot}.`, 'lawngreen');
     } else profile = new Profile();
+    GUI.setArea(profile.getCurrentArea());
     GUI.setBalance(profile.getBalance());
     GUI.setInventoryValue(profile.getInventoryValue());
 }
@@ -76,7 +77,7 @@ function unlock(area) {
         if(profile.getUnlocked() < area) {
             profile.setUnlocked(area);
             profile.withdraw(Areas.areas[area].cost);
-            GUI.alert('shop-alert', `Unlocked the ${Areas.areas[area].name} area.`, 'lawngreen');
+            GUI.alert('shop-alert', `Unlocked the ${Areas.areas[area].name} area for \$${GUI.localizeStyle(Areas.areas[area].cost)}.`, 'lawngreen');
         } else GUI.alert('shop-alert', `You already have the ${Areas.areas[area].name} area.`, 'red');
     } else GUI.alert('shop-alert', `You cannot afford the ${Areas.areas[area].name} area.`, 'red');
 }
@@ -87,7 +88,7 @@ function unlock(area) {
 function move(area) {
     if(profile.getUnlocked() >= area) {
         profile.setCurrentArea(area);
-        Areas.setArea(area);
+        GUI.setArea(area);
         GUI.alert('area-alert', `Moved to the ${Areas.areas[area].name} area.`, 'lawngreen');
     } else GUI.alert('area-alert', `You have not unlocked the ${Areas.areas[area].name} area.`, 'red');
 }
@@ -172,7 +173,7 @@ function buyRod(rod) {
         if(rod > profile.getRod()) {
             profile.withdraw(Tools.rods[rod].cost);
             profile.setRod(rod);
-            GUI.alert('shop-alert', `You bought the ${Tools.rods[rod].name} rod for \$${Tools.rods[rod].cost}.`, 'lawngreen');
+            GUI.alert('shop-alert', `You bought the ${Tools.rods[rod].name} rod for \$${GUI.localizeStyle(Tools.rods[rod].cost)}.`, 'lawngreen');
         } else GUI.alert('shop-alert', `You already own a better rod.`, 'red');
     } else GUI.alert('shop-alert', `You cannot afford the ${Tools.rods[rod].name} rod.`, 'red');
 }

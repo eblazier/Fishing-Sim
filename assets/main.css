@@ -1,6 +1,6 @@
 :root {
     /* Sprite List */
-    --background: ;
+    --background: url(../assets/images/background.png);
 }
 
 html {
@@ -11,8 +11,9 @@ html {
 
 body {
     width: 100%;
-    height: 100px;
+    height: 160vw;
     margin: 0;
+    background: linear-gradient(#46a1ff 0 50%, #29ba3d 50% 100%);
 }
 
 button:hover {
@@ -31,8 +32,9 @@ header {
     left: 0;
     width: 100%;
     height: 30px;
-    background-color: #4d4d4d;
+    background-color: #4d4d4ddb;
     box-shadow: 0 0 5px #000;
+    z-index: 9;
 }
 
 header span {
@@ -50,7 +52,21 @@ header span {
 main {
     top: 30px;
     width: 100%;
+    height: 160vw;
     background-image: var(--background);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    overflow-y: scroll;
+}
+
+#player {
+    position: absolute;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    background: #ff0000;
+    box-shadow: 0 0 5px 5px #ff0000;
+    transition-duration: 0.2s;
 }
 
 
@@ -72,19 +88,20 @@ footer {
     border-radius: 0 10px 10px 0;
 }
 
-.menu-menu, .save-menu, .area-menu, .shop-menu {
+.menu-menu, .save-menu, .fishing-menu, .area-menu, .shop-menu {
     user-select: none;
     position: fixed;
     font-family: 'Courier New', monospace;
     padding: 10px;
-    background: #4d4d4d;
+    background: #4d4d4ddb;
     color: #fff;
     font-weight: 600;
     box-shadow: 0 0 5px #000;
     transition-duration: 0.1s;
+    z-index: 9;
 }
 
-.menu-menu button, .save-menu button, .area-menu button, .shop-menu button {
+.menu-menu button, .save-menu button, .fishing-menu button, .area-menu button, .shop-menu button {
     color: #fff;
     background-color: #656565;
     border: 2px solid #6b6b6b;
@@ -108,6 +125,21 @@ footer {
 .save-menu {
     top: 108px;
     border-radius: 0 10px 10px 0;
+}
+
+
+/* Fishing */
+
+.fishing-menu {
+    top: 260px;
+    left: 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.fishing-menu button {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 14px;
 }
 
 

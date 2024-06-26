@@ -40,6 +40,11 @@
         <span id="saving-alert"></span>
     </div>
 
+    <div class="fishing-menu">
+        <button onclick="cast()">CAST</button><br>
+        <button onclick="sellAll()">SELL</button>
+    </div>
+
     <div class="area-menu">
         TO AREAS: <button onclick="move(0)">To LAKE</button><button onclick="move(1)">To RIVER</button><button onclick="move(2)">To BEACH</button><button onclick="move(3)">To OCEAN</button><br>
         <span id="area-alert"></span>
@@ -52,14 +57,10 @@
     </div>
 
     <main>
-        
+        <div id="player"></div>
     </main>
 
     <footer>
-        fishing:
-        <button onclick="cast()">cast</button>
-        <button onclick="sellAll()">sell</button>
-        <br>
         dev:
         <button onclick="profile.deposit(10000)">give 10k</button>
     </footer>

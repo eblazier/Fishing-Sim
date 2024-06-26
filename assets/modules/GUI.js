@@ -1,4 +1,4 @@
-/** */
+/** Class for controlling the on-screen GUI */
 class GUI {
     /**
      * changes the style of a number to include commas every 3 numbers before the decimal place
@@ -8,6 +8,25 @@ class GUI {
     static localizeStyle(x) {
         return x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
+
+    /** x and y values of each fishing location in vw */
+    static fishingLocations = [
+        {x: 38, y: 8.5},
+        {x: 68, y: 44},
+        {x: 43.7, y: 99},
+        {x: 49.5, y: 151}
+    ];
+
+    /**
+     * sets the location of the player element to a new x and y value
+     * @param {vw} x the x value to set the location of the player to
+     * @param {vw} y the y value to set the location of the player to
+     */
+    static setLocation(x, y) {
+        document.getElementById('player').style.marginLeft = x + "vw";
+        document.getElementById('player').style.marginTop = y + "vw";
+    }
+
 
     /* Toggles */
 
@@ -22,6 +41,7 @@ class GUI {
         else document.getElementsByClassName('shop-menu')[0].style.right = '-500px';
     }
 
+
     /* Setters */
 
     /** @param {double} x */
@@ -31,6 +51,11 @@ class GUI {
     /** @param {double} x */
     static setBalance(x) {
         document.getElementById('balance').textContent = 'Balance: $' + GUI.localizeStyle(x.toFixed(2));
+    }
+    /** @param {int} area the area to set it to [0-3] */
+    static setArea(area) {
+        document.getElementById('area').textContent = 'Area: ' + Areas.areas[area].name;
+        GUI.setLocation(GUI.fishingLocations[area].x, GUI.fishingLocations[area].y);
     }
 
     /**
