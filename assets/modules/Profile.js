@@ -56,4 +56,8 @@ class Profile {
         this.balance += x;
         GUI.setBalance(this.balance);
     }
+
+    toString() {
+        console.log(`profile === new Profile(${this.balance}, ${this.inventoryValue}, ${this.rod}, ${this.currentArea}, ${this.unlocked})`);
+    }
 }
