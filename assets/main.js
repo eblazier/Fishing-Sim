@@ -32,20 +32,9 @@ function save(slot) {
  * @param {int} slot the save file to load
  */
 function load(slot) {
-    switch(slot) {
-        case 1:
-            profile = save1;
-            break;
-        case 2:
-            profile = save2;
-            break;
-        case 3:
-            profile = save3;
-            break;
-        default:
-            profile = new Profile(0, 0, 0, 0, 0);
-            break;
-    }
+    const saves = [save1, save2, save3];
+    if(slot <= saves.length) profile = saves[slot - 1];
+    else profile = new Profile();
     Profile.setBalance(profile.getBalance());
     Profile.setInventoryValue(profile.getInventoryValue());
 }

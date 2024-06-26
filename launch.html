@@ -8,6 +8,7 @@
     <!-- Imports -->
     <script src="./assets/modules/Areas.js"></script>
     <script src="./assets/modules/Fish.js"></script>
+    <script src="./assets/modules/GUI.js"></script>
     <script src="./assets/modules/Profile.js"></script>
     <script src="./assets/modules/Rand.js"></script>
     <script src="./assets/modules/Tools.js"></script>
@@ -28,36 +29,34 @@
         <span align="right" id="invValue"></span>
     </header>
 
+    <div class="menu-menu">
+        MENUS: <button onclick="GUI.toggleSaving()">Toggle SAVING</button><button onclick="GUI.toggleShop()">Toggle SHOP</button>
+    </div>
+
+    <div class="save-menu" style="left: -500px;">
+        SAVE: <button onclick="save(1)">Slot #1</button><button onclick="save(2)">Slot #2</button><button onclick="save(3)">Slot #3</button>
+        <br>
+        LOAD: <button onclick="load(1)">Slot #1</button><button onclick="load(2)">Slot #2</button><button onclick="load(3)">Slot #3</button>
+    </div>
+
+    <div class="area-menu">
+        TO AREAS: <button onclick="move(0)">To LAKE</button><button onclick="move(1)">To RIVER</button><button onclick="move(2)">To BEACH</button><button onclick="move(3)">To OCEAN</button>
+    </div>
+
+    <div class="shop-menu" style="right: -500px;">
+        BUY AREA: <button onclick="unlock(1)">RIVER</button><button onclick="unlock(2)">BEACH</button><button onclick="unlock(3)">OCEAN</button><br>
+        BUY ROD:&nbsp; <button onclick="buyRod(1)">NOVICE</button><button onclick="buyRod(2)">REINFORCED</button><button onclick="buyRod(3)">GOLDEN</button><button onclick="buyRod(4)">GOD</button><br>
+        <span id="shop-alert"></span>
+    </div>
+
     <main>
         
     </main>
 
     <footer>
-        save: <button onclick="save(1)">save to save1</button><br>
-        load: <button onclick="load(1)">load from save1</button><br>
-        <br>
         fishing:
         <button onclick="cast()">cast</button>
         <button onclick="sellAll()">sell</button>
-        <br>
-        buy rods:
-        <button onclick="buyRod(0)">unlock basic rod</button>
-        <button onclick="buyRod(1)">unlock novice rod</button>
-        <button onclick="buyRod(2)">unlock reinforced rod</button>
-        <button onclick="buyRod(3)">unlock golden rod</button>
-        <button onclick="buyRod(4)">unlock god rod</button>
-        <br>
-        unlock area:
-        <button onclick="unlock(1)">unlock river</button>
-        <button onclick="unlock(2)">unlock beach</button>
-        <button onclick="unlock(3)">unlock ocean</button>
-        <br>
-        nav:
-        <button onclick="move(0)">go to lake</button>
-        <button onclick="move(1)">go to river</button>
-        <button onclick="move(2)">go to beach</button>
-        <button onclick="move(3)">go to ocean</button>
-        <br>
         <br>
         dev:
         <button onclick="profile.deposit(10000)">give 10k</button>

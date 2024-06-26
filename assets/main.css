@@ -5,34 +5,38 @@
 
 html {
     width: 100%;
+    height: 100%;
     font-family: Verdana, sans-serif;
 }
 
 body {
     width: 100%;
+    height: 100px;
     margin: 0;
 }
 
-main {
-    top: 30px;
-    width: 100%;
-    background-image: var(--background);
+button:hover {
+    opacity: 0.65;
+    transition-duration: 0.15s;
 }
 
 
 /* Header */
 
 header {
+    user-select: none;
+    position: fixed;
     display: flex;
     top: 0;
     left: 0;
     width: 100%;
     height: 30px;
-    background-color: #666;
-    box-shadow: 0 0 8px 2px #000;
+    background-color: #4d4d4d;
+    box-shadow: 0 0 5px #000;
 }
 
 header span {
+    user-select: none;
     font-weight: 600;
     padding: 0 6px;
     width: calc(100% / 3);
@@ -43,8 +47,73 @@ header span {
 
 /* Main */
 
+main {
+    top: 30px;
+    width: 100%;
+    background-image: var(--background);
+}
 
+
+/* Footer */
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
 
 
 /* Controls */
 
+/* Menus */
+
+.menu-menu {
+    top: 45px;
+    left: 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.menu-menu, .save-menu, .area-menu, .shop-menu {
+    user-select: none;
+    position: fixed;
+    font-family: 'Courier New', monospace;
+    padding: 10px;
+    background: #4d4d4d;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 0 5px #000;
+    transition-duration: 0.2s;
+}
+
+.menu-menu button, .save-menu button, .area-menu button, .shop-menu button {
+    color: #fff;
+    background-color: #656565;
+    border: 2px solid #6b6b6b;
+    border-radius: 5px;
+    box-shadow: 0 0 1px 0 #000;
+    margin: 3px 2px;
+}
+
+
+/* Saving/Loading */
+
+.save-menu {
+    top: 108px;
+    border-radius: 0 10px 10px 0;
+}
+
+
+/* Areas */
+
+.area-menu {
+    top: 45px;
+    right: 0;
+    border-radius: 10px 0 0 10px;
+}
+
+
+/* Shop */
+
+.shop-menu {
+    top: 108px;
+    border-radius: 10px 0 0 10px;
+}

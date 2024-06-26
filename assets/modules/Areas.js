@@ -24,8 +24,8 @@ class Areas {
         [(0), (0.50), 0.50 + (0.25), 0.75 + (0.20), 0.95 + (0.05)] // c0 r50, l25, e15, ed5
     ];
 
-    /** @param {int} x the area to set it to [0-3] */
-    static setArea(x) {
-        document.getElementById('area').textContent = 'Area: ' + this.areas[x].name;
+    /** @param {int} area the area to set it to [0-3] */
+    static setArea(area) {
+        document.getElementById('area').textContent = 'Area: ' + this.areas[area].name;
     }
 }
