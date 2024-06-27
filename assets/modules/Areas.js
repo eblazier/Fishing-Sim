@@ -12,8 +12,8 @@ class Areas {
     static areaFish = [
         /* Lake  Fish */ {common: ["c"], rare: ["r"], legendary: ["l"]},
         /* River Fish */ {common: ["c"], rare: ["r"], legendary: ["l"]},
-        /* Beach Fish */ {rare: ["r"], legendary: ["l"], exotic: ["ex"]},
-        /* Ocean Fish */ {rare: ["r"], legendary: ["l"], exotic: ["ex"], endangered: ["en"]}
+        /* Beach Fish */ {common: ["c"], rare: ["r"], legendary: ["l"], exotic: ["ex"]},
+        /* Ocean Fish */ {common: ["c"], rare: ["r"], legendary: ["l"], exotic: ["ex"], endangered: ["en"]}
     ];
 
     /** array of the chances one may find a certain grade of fish in a given area */

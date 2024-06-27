@@ -58,6 +58,6 @@ class Profile {
     }
 
     toString() {
-        console.log(`profile === new Profile(${this.balance}, ${this.inventoryValue}, ${this.rod}, ${this.currentArea}, ${this.unlocked})`);
+        console.log(`{balance: ${this.balance}, inventoryValue: ${this.inventoryValue}, rod: ${this.rod}, currentArea: ${this.currentArea}, unlocked: ${this.unlocked}}`);
     }
 }

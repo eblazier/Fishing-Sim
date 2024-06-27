@@ -149,11 +149,14 @@ and are in the ${profile.getCurrentArea() + 1}th area.
 Luck level is: ${chance}`
     );
 
-    for(let grade = 0; grade < 5; grade++)
+    // TODO: rewrite this shit oh my god
+    for(let grade = 0; grade < 5; grade++) {
+        if(Areas.areaChances[profile.getCurrentArea()][grade] == undefined) continue;
         if(chance <= Areas.areaChances[profile.getCurrentArea()][grade] - (Tools.rods[profile.rod].luck * Tools.luckBonus)) {
             catchFish(grade, profile.getCurrentArea());
             break;
         }
+    }
 }
 
 /** sells all fishes in the player's inventory */
