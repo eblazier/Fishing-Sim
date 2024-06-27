@@ -29,31 +29,35 @@
         <span align="right" id="invValue"></span>
     </header>
 
-    <div class="menu-menu">
+    <div class="menu" id="menu-menu">
         MENUS: <button onclick="GUI.toggleSaving()">Toggle SAVING</button><button onclick="GUI.toggleShop()">Toggle SHOP</button>
     </div>
 
-    <div class="save-menu" style="left: -500px;">
+    <div class="menu" id="saving-menu" style="left: -500px;">
         SAVE:&nbsp; <button onclick="save(1, false)">Slot #1</button><button onclick="save(2, false)">Slot #2</button><button onclick="save(3, false)">Slot #3</button><br>
         LOAD:&nbsp; <button onclick="load(1)">Slot #1</button><button onclick="load(2)">Slot #2</button><button onclick="load(3)">Slot #3</button><br>
         RESET: <button onclick="save(1, true)">Slot #1</button><button onclick="save(2, true)">Slot #2</button><button onclick="save(3, true)">Slot #3</button><br>
-        <span id="saving-alert"></span>
+        <span class="alert" id="saving-alert"></span>
     </div>
 
-    <div class="fishing-menu">
+    <div class="menu" id="fishing-menu">
         <button onclick="cast()">CAST</button><br>
         <button onclick="sellAll()">SELL</button>
     </div>
 
-    <div class="area-menu">
+    <div class="menu" id="area-menu">
         TO AREAS: <button onclick="move(0)">To LAKE</button><button onclick="move(1)">To RIVER</button><button onclick="move(2)">To BEACH</button><button onclick="move(3)">To OCEAN</button><br>
-        <span id="area-alert"></span>
+        <span class="alert" id="area-alert"></span>
     </div>
 
-    <div class="shop-menu" style="right: -500px; top: 108px;">
+    <div class="menu" id="shop-menu" style="right: -500px; top: 108px;">
         BUY AREA: <button onclick="unlock(1)">RIVER</button><button onclick="unlock(2)">BEACH</button><button onclick="unlock(3)">OCEAN</button><br>
         BUY ROD:&nbsp; <button onclick="buyRod(1)">NOVICE</button><button onclick="buyRod(2)">REINFORCED</button><button onclick="buyRod(3)">GOLDEN</button><button onclick="buyRod(4)">GOD</button><br>
-        <span id="shop-alert"></span>
+        <span class="alert" id="shop-alert"></span>
+    </div>
+
+    <div class="menu" id="catching-menu">
+
     </div>
 
     <main>

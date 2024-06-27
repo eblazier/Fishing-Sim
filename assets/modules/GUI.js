@@ -31,14 +31,14 @@ class GUI {
     /* Toggles */
 
     static toggleSaving() {
-        if(document.getElementsByClassName('save-menu')[0].style.left == '-500px')
-            document.getElementsByClassName('save-menu')[0].style.left = '0';
-        else document.getElementsByClassName('save-menu')[0].style.left = '-500px';
+        if(document.getElementById('save-menu').style.left == '-500px')
+            document.getElementById('save-menu').style.left = '0';
+        else document.getElementById('save-menu').style.left = '-500px';
     }
     static toggleShop() {
-        if(document.getElementsByClassName('shop-menu')[0].style.right == '-500px')
-            document.getElementsByClassName('shop-menu')[0].style.right = '0';
-        else document.getElementsByClassName('shop-menu')[0].style.right = '-500px';
+        if(document.getElementById('shop-menu').style.right == '-500px')
+            document.getElementById('shop-menu').style.right = '0';
+        else document.getElementById('shop-menu').style.right = '-500px';
     }
 
 
@@ -65,14 +65,14 @@ class GUI {
      * @param {String} color color of the text in the alert box
      */
     static alert(elem, content, color) {
-        if(elem == 'area-alert') document.getElementsByClassName('shop-menu')[0].style.top = '126px';
+        if(elem == 'area-alert') document.getElementById('shop-menu').style.top = '126px';
         document.getElementById(elem).textContent = content;
         document.getElementById(elem).style.color = color;
         for(let timeout in recentTimeouts) clearTimeout(recentTimeouts[timeout]);
         recentTimeouts = [];
         recentTimeouts.push(setTimeout(() => {
             document.getElementById(elem).textContent = '';
-            if(elem == 'area-alert') document.getElementsByClassName('shop-menu')[0].style.top = '108px';
+            if(elem == 'area-alert') document.getElementById('shop-menu').style.top = '108px';
         }, 3500));
     }
 }

@@ -83,13 +83,13 @@ footer {
 
 /* Menus */
 
-.menu-menu {
+#menu-menu {
     top: 45px;
     left: 0;
     border-radius: 0 10px 10px 0;
 }
 
-.menu-menu, .save-menu, .fishing-menu, .area-menu, .shop-menu {
+.menu {
     user-select: none;
     position: fixed;
     font-family: 'Courier New', monospace;
@@ -102,7 +102,7 @@ footer {
     z-index: 9;
 }
 
-.menu-menu button, .save-menu button, .fishing-menu button, .area-menu button, .shop-menu button {
+.menu button {
     color: #fff;
     background-color: #656565;
     border: 2px solid #6b6b6b;
@@ -111,11 +111,11 @@ footer {
     margin: 3px 2px;
 }
 
-.save-menu button[onclick="save(1, true)"] {
+#save-menu button[onclick="save(1, true)"] {
     margin: 18px 2px 3px
 }
 
-#area-alert, #saving-alert, #shop-alert {
+.alert {
     font-size: 12px;
     color: red;
 }
@@ -123,7 +123,7 @@ footer {
 
 /* Saving/Loading */
 
-.save-menu {
+#save-menu {
     top: 108px;
     border-radius: 0 10px 10px 0;
 }
@@ -131,13 +131,13 @@ footer {
 
 /* Fishing */
 
-.fishing-menu {
+#fishing-menu {
     top: 260px;
     left: 0;
     border-radius: 0 10px 10px 0;
 }
 
-.fishing-menu button {
+#fishing-menu button {
     font-family: 'Courier New', monospace;
     font-weight: 700;
     font-size: 14px;
@@ -146,7 +146,7 @@ footer {
 
 /* Areas */
 
-.area-menu {
+#area-menu {
     top: 45px;
     right: 0;
     border-radius: 10px 0 0 10px;
@@ -155,7 +155,7 @@ footer {
 
 /* Shop */
 
-.shop-menu {
+#shop-menu {
     top: 108px;
     border-radius: 10px 0 0 10px;
 }
