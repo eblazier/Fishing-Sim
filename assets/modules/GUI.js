@@ -1,4 +1,4 @@
-/** Class for controlling the on-screen GUI */
+/** Static class for controlling the on-screen GUI */
 class GUI {
     /**
      * changes the style of a number to include commas every 3 numbers before the decimal place
@@ -31,9 +31,9 @@ class GUI {
     /* Toggles */
 
     static toggleSaving() {
-        if(document.getElementById('save-menu').style.left == '-500px')
-            document.getElementById('save-menu').style.left = '0';
-        else document.getElementById('save-menu').style.left = '-500px';
+        if(document.getElementById('saving-menu').style.left == '-500px')
+            document.getElementById('saving-menu').style.left = '0';
+        else document.getElementById('saving-menu').style.left = '-500px';
     }
     static toggleShop() {
         if(document.getElementById('shop-menu').style.right == '-500px')

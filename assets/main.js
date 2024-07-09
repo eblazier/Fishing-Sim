@@ -156,6 +156,7 @@ Luck level is: ${chance}`
             catchFish(grade, profile.getCurrentArea());
             break;
         }
+        if(grade == 4) catchFish(Rand.int(0, 4), profile.getCurrentArea());
     }
 }
 
@@ -172,11 +173,12 @@ function sellAll() {
  * @param {int} rod the rod that will be bought according to the rods array [0-4]
  */
 function buyRod(rod) {
-    if(Tools.rods[rod].cost <= profile.getBalance()) {
-        if(rod > profile.getRod()) {
+    if(rod > profile.getRod()) {
+        if(Tools.rods[rod].cost <= profile.getBalance()) {
             profile.withdraw(Tools.rods[rod].cost);
             profile.setRod(rod);
             GUI.alert('shop-alert', `You bought the ${Tools.rods[rod].name} rod for \$${GUI.localizeStyle(Tools.rods[rod].cost)}.`, 'lawngreen');
-        } else GUI.alert('shop-alert', `You already own a better rod.`, 'red');
-    } else GUI.alert('shop-alert', `You cannot afford the ${Tools.rods[rod].name} rod.`, 'red');
+        } else GUI.alert('shop-alert', `You cannot afford the ${Tools.rods[rod].name} rod.`, 'red');
+    } else if(rod == profile.getRod()) GUI.alert('shop-alert', `You already own that rod.`, 'red');
+    else GUI.alert('shop-alert', `You already own a better rod.`, 'red');
 }

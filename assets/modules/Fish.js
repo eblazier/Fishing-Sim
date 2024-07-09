@@ -1,4 +1,4 @@
-/** Fish class for fishies :3333 */
+/** Object class for fish objects */
 class Fish {
     /**
      * @param {String} name the name of the fish

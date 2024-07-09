@@ -1,4 +1,4 @@
-/** Class for getting random values */
+/** Static class for getting random values */
 class Rand {
     /** 
      * @param {int} min minimum possible value that can be returned

@@ -1,4 +1,4 @@
-/** Class for storing the properties of one's profile */
+/** Object class for storing the properties of one's profile */
 class Profile {
     /**
      * @param {double} balance the player's balance

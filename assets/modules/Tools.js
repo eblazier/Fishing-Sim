@@ -9,6 +9,6 @@ class Tools {
         {name: "Novice", luck: 1, cost: 1500},
         {name: "Reinforced", luck: 3, cost: 8000},
         {name: "Golden", luck: 5, cost: 25000},
-        {name: "God", luck: 999, cost: 99999}
+        {name: "God", luck: 25, cost: 100000}
     ];
 }
